@@ -6,7 +6,12 @@ import { shuffleSort } from './sorting-algos/shuffle-sort'
 export type SortingAlgoRithm = (array: number[]) => number[]
 
 // TODO: add more from https://en.wikipedia.org/wiki/Sorting_algorithm
-export enum SortingAlgorithms { Quick, Merge, Bubble, Shuffle }
+export enum SortingAlgorithms { 
+  Quick = "Quick Sort", 
+  Merge = "Merge Sort", 
+  Bubble = "Bubble Sort", 
+  Shuffle = "Shuffle Sort", 
+}
 
 const sortingAlgos = {
   [SortingAlgorithms.Bubble]: bubbleSort,
