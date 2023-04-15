@@ -1,2 +1,8 @@
+<script>
+  import { useSorting } from '../hooks/use-sorting'  
+  const { getRandomArray } = useSorting()
+  const array = getRandomArray(100)
+</script>
+
 <h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<p>{array}</p>
