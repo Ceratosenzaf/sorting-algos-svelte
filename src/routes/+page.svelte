@@ -3,24 +3,35 @@
 	import { SortingAlgorithms, useSorting } from '../hooks/use-sorting'
 	import Slider from '../components/Slider.svelte'
 	import Select from '../components/Select.svelte'
+	import PlayButton from '../components/PlayButton.svelte'
+	import classNames from 'classnames'
 
 	const { getRandomArray } = useSorting()
 
+	const placeholder = 'Choose an algorithm'
 	const options = Object.values(SortingAlgorithms).map((v) => ({
 		value: v,
 		label: v,
 	}))
 
+	const handlePlay = () => {
+		if (currentAlgo) isPlaying = !isPlaying
+		else showError = true
+	}
+
 	let currentSize = 55
 	let deviation = 50 // as a percentage from the mean (50)
 	let currentAlgo: SortingAlgorithms | undefined = undefined
-	const placeholder = 'Choose an algorithm'
+	let isPlaying = false
+	let showWhenPlaying = false
+	let showError = false
 
 	$: array = getRandomArray(currentSize, deviation)
+	$: if (isPlaying) showWhenPlaying = false
 </script>
 
-<div class="flex flex-col max-w-5xl mx-auto p-4 gap-4 overflow-hidden">
-	<h1 class="text-center text-4xl font-bold text-gray-700">{currentAlgo ?? placeholder}</h1>
+<div class="flex flex-col max-w-5xl mx-auto p-4 gap-4 overflow-hidden text-slate-700">
+	<h1 class="text-center text-4xl font-bold">{currentAlgo ?? placeholder}</h1>
 
 	<div class="flex flex-col lg:flex-row gap-2">
 		<Slider
@@ -29,8 +40,22 @@
 			value={currentSize}
 			min={10}
 		/>
-		<div class="relative order-1 lg:order-2 max-w-[904px]">
-			<div class="absolute inset-0" />
+		<div class="relative order-1 lg:order-2 max-w-[904px] group">
+			<button
+				class={classNames(
+					'absolute inset-0 flex justify-center items-center bg-slate-700 bg-opacity-30',
+					{
+						'opacity-0 bg-transparent transition duration-300': isPlaying,
+						'group-hover:opacity-100 group-hover:bg-slate-700 group-hover:bg-opacity-30':
+							isPlaying && showWhenPlaying,
+					}
+				)}
+				on:click={handlePlay}
+				on:pointerleave={() => (showWhenPlaying = false)}
+				on:pointerenter={() => (showWhenPlaying = true)}
+			>
+				<PlayButton {isPlaying} />
+			</button>
 			<Canvas {array} />
 		</div>
 		<Slider class="order-3" on:change={(v) => (deviation = v.detail)} value={deviation} />
@@ -41,5 +66,6 @@
 		{options}
 		selected={currentAlgo}
 		{placeholder}
+		error={showError && !currentAlgo}
 	/>
 </div>

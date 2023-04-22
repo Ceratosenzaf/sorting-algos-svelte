@@ -33,7 +33,7 @@
 			--range-slider: rgb(243 244 246); /* slider main background color */
 			--range-handle-inactive: rgb(156 163 175); /* inactive handle color */
 			--range-handle: rgb(156 163 175); /* non-focussed handle color */
-			--range-handle-focus: rgb(55 65 81); /* focussed handle color */
+			--range-handle-focus: rgb(51 65 85); /* focussed handle color */
 			--range-handle-border: var(--range-handle);
 			--range-range-inactive: var(
 				--range-handle-inactive

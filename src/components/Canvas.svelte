@@ -27,10 +27,4 @@
 	}
 </script>
 
-<canvas
-	bind:this={canvas}
-	class={classNames(
-		'w-full h-[60vh] bg-gray-100 lg:h-[40vh] border-4 border-gray-700',
-		$$props.class
-	)}
-/>
+<canvas bind:this={canvas} class="w-full h-[60vh] bg-white lg:h-[40vh] border-4 border-gray-700" />
