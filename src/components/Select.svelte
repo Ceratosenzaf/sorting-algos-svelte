@@ -18,15 +18,15 @@
 
 <select
 	class={classNames(
-		'px-4 py-2 max-w-xs mx-auto w-full rounded-md border-r-[16px] bg-gray-100 border-r-transparent',
-		{ 'outline outline-rose-700 text-rose-700': error }
+		'px-4 py-2 max-w-xs mx-auto w-full rounded-md border-r-[16px] hover:outline focus:outline outline-txt bg-light-gray border-r-transparent',
+		{ 'outline !outline-error text-error': error }
 	)}
 	bind:value={selected}
 >
 	{#if placeholder}
-		<option class="text-slate-700" value="" disabled selected>{placeholder}</option>
+		<option class="text-txt" value="" disabled selected>{placeholder}</option>
 	{/if}
 	{#each options as option}
-		<option class="text-slate-700" value={option.value}>{option.label}</option>
+		<option class="text-txt" value={option.value}>{option.label}</option>
 	{/each}
 </select>

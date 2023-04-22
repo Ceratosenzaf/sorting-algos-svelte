@@ -40,11 +40,13 @@
 	$: isPlaying ? progress.set(pauseCoords) : progress.set(playCoords)
 </script>
 
-<div class="w-20 h-20 rounded-full bg-gray-100 flex justify-center items-center shadow-lg">
+<div
+	class="w-20 h-20 rounded-full bg-light-gray flex justify-center items-center shadow-lg fill-txt stroke-txt"
+>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250.51786 279.81226" width="33">
 		<g transform="translate(-212.13203,-347.27573)">
-			<path class="fill-slate-700 stroke-slate-700" d={coordsToPath($progress[0])} />
-			<path class="fill-slate-700 stroke-slate-700" d={coordsToPath($progress[1])} />
+			<path d={coordsToPath($progress[0])} />
+			<path d={coordsToPath($progress[1])} />
 		</g>
 	</svg>
 </div>

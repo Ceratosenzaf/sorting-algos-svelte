@@ -30,7 +30,7 @@
 	$: if (isPlaying) showWhenPlaying = false
 </script>
 
-<div class="flex flex-col max-w-5xl mx-auto p-4 gap-4 overflow-hidden text-slate-700">
+<div class="flex flex-col max-w-5xl mx-auto p-4 gap-4 overflow-hidden text-txt">
 	<h1 class="text-center text-4xl font-bold">{currentAlgo ?? placeholder}</h1>
 
 	<div class="flex flex-col lg:flex-row gap-2">
@@ -43,10 +43,10 @@
 		<div class="relative order-1 lg:order-2 max-w-[904px] group">
 			<button
 				class={classNames(
-					'absolute inset-0 flex justify-center items-center bg-slate-700 bg-opacity-30',
+					'absolute inset-0 flex justify-center items-center bg-txt bg-opacity-30',
 					{
 						'opacity-0 bg-transparent transition duration-300': isPlaying,
-						'group-hover:opacity-100 group-hover:bg-slate-700 group-hover:bg-opacity-30':
+						'group-hover:opacity-100 group-hover:bg-txt group-hover:bg-opacity-30':
 							isPlaying && showWhenPlaying,
 					}
 				)}
