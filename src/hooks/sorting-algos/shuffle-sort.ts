@@ -1,5 +1,5 @@
-import type { SortingAlgoRithm } from "../use-sorting";
+import type { SortingAlgoRithm } from '../use-sorting'
 
 export const shuffleSort: SortingAlgoRithm = (array) => {
-  return array
+	return array
 }
