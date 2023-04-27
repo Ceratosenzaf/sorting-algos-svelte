@@ -1,5 +1,4 @@
 <script lang="ts">
-	import classNames from 'classnames'
 	import { onMount } from 'svelte'
 
 	export let array: number[] = []

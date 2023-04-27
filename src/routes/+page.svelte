@@ -25,9 +25,13 @@
 	let isPlaying = false
 	let showWhenPlaying = false
 	let showError = false
+	let movingTimer = 0
+	let showButton = true
 
 	$: array = getRandomArray(currentSize, deviation)
 	$: if (isPlaying) showWhenPlaying = false
+	$: if (!isPlaying || showWhenPlaying) showButton = true
+	else setTimeout(() => (showButton = false), 300)
 </script>
 
 <div class="flex flex-col max-w-5xl mx-auto p-4 gap-4 overflow-hidden text-txt">
@@ -41,21 +45,25 @@
 			min={10}
 		/>
 		<div class="relative order-1 lg:order-2 max-w-[904px] group">
-			<button
-				class={classNames(
-					'absolute inset-0 flex justify-center items-center bg-txt bg-opacity-30',
-					{
-						'opacity-0 bg-transparent transition duration-300': isPlaying,
-						'group-hover:opacity-100 group-hover:bg-txt group-hover:bg-opacity-30':
-							isPlaying && showWhenPlaying,
-					}
-				)}
-				on:click={handlePlay}
+			<div
+				class={classNames('absolute inset-0 bg-txt bg-opacity-30', {
+					'opacity-0 bg-transparent transition duration-300': isPlaying,
+					'group-hover:opacity-100 group-hover:bg-txt group-hover:bg-opacity-30':
+						isPlaying && showWhenPlaying,
+				})}
 				on:pointerleave={() => (showWhenPlaying = false)}
-				on:pointerenter={() => (showWhenPlaying = true)}
+				on:pointermove={() => {
+					showWhenPlaying = true
+					clearTimeout(movingTimer)
+					movingTimer = setTimeout(() => (showWhenPlaying = false), 1000)
+				}}
 			>
-				<PlayButton {isPlaying} />
-			</button>
+				{#if showButton}
+					<button on:click={handlePlay} class="w-full h-full flex justify-center items-center">
+						<PlayButton {isPlaying} />
+					</button>
+				{/if}
+			</div>
 			<Canvas {array} />
 		</div>
 		<Slider class="order-3" on:change={(v) => (deviation = v.detail)} value={deviation} />
