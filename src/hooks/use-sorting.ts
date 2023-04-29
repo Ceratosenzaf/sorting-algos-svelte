@@ -3,7 +3,7 @@ import { mergeSort } from './sorting-algos/merge-sort'
 import { bubbleSort } from './sorting-algos/bubble-sort'
 import { shuffleSort } from './sorting-algos/shuffle-sort'
 
-export type SortingAlgoRithm = (array: number[]) => number[]
+export type SortingAlgoRithm = (array: number[]) => Promise<number[]>
 
 // TODO: add more from https://en.wikipedia.org/wiki/Sorting_algorithm
 export enum SortingAlgorithms {
@@ -20,17 +20,4 @@ const sortingAlgos = {
 	[SortingAlgorithms.Shuffle]: shuffleSort,
 }
 
-const getSortingAlgo = (algo: SortingAlgorithms) => sortingAlgos[algo]
-
-const getRandomArray = (length: number, difference: number) => {
-	const array = new Array(length).fill(0).map(() => Math.random() * 100)
-	const mean = array.reduce((a, b) => a + b, 0) / array.length
-	const sd = Math.sqrt(array.reduce((a, b) => a + (b - mean) * (b - mean), 0) / (array.length - 1))
-
-	return array.map((n) => ((difference / 2) * (n - mean)) / sd + 50)
-}
-
-export const useSorting = () => ({
-	getSortingAlgo,
-	getRandomArray,
-})
+export const getSortingAlgo = (algo: SortingAlgorithms) => sortingAlgos[algo]

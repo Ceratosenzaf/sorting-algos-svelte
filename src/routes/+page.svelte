@@ -1,12 +1,11 @@
 <script lang="ts">
 	import Canvas from '../components/Canvas.svelte'
-	import { SortingAlgorithms, useSorting } from '../hooks/use-sorting'
+	import { SortingAlgorithms } from '../hooks/use-sorting'
 	import Slider from '../components/Slider.svelte'
 	import Select from '../components/Select.svelte'
 	import PlayButton from '../components/PlayButton.svelte'
 	import classNames from 'classnames'
-
-	const { getRandomArray } = useSorting()
+	import { sortedArray } from '../stores/sorted-array'
 
 	const placeholder = 'Choose an algorithm'
 	const options = Object.values(SortingAlgorithms).map((v) => ({
@@ -17,6 +16,8 @@
 	const handlePlay = () => {
 		if (currentAlgo) isPlaying = !isPlaying
 		else showError = true
+
+		if(isPlaying && currentAlgo) sortedArray.sort(currentAlgo).then(() => isPlaying = false)
 	}
 
 	let currentSize = 55
@@ -28,7 +29,7 @@
 	let movingTimer = 0
 	let showButton = true
 
-	$: array = getRandomArray(currentSize, deviation)
+	$: sortedArray.reset(currentSize, deviation)
 	$: if (isPlaying) showWhenPlaying = false
 	$: if (!isPlaying || showWhenPlaying) showButton = true
 	else setTimeout(() => (showButton = false), 300)
@@ -64,7 +65,7 @@
 					</button>
 				{/if}
 			</div>
-			<Canvas {array} />
+			<Canvas array={$sortedArray} />
 		</div>
 		<Slider class="order-3" on:change={(v) => (deviation = v.detail)} value={deviation} />
 	</div>
