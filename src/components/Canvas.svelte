@@ -2,11 +2,18 @@
 	import { onMount } from 'svelte'
 
 	export let array: number[] = []
+	export let aspectRatio = 2
 
 	let canvas: HTMLCanvasElement | null = null
 	let ctx: CanvasRenderingContext2D | null = null
 
 	onMount(() => {
+		if(canvas) {
+			const actualSizes = canvas.getBoundingClientRect()
+			canvas.width = actualSizes.width * aspectRatio
+			canvas.height = actualSizes.height * aspectRatio
+		}
+		
 		ctx = canvas?.getContext('2d') ?? null
 		if (ctx) ctx.fillStyle = 'red'
 		drawAllRect(array)
