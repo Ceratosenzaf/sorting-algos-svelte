@@ -3,7 +3,7 @@ import { mergeSort } from './sorting-algos/merge-sort'
 import { bubbleSort } from './sorting-algos/bubble-sort'
 import { shuffleSort } from './sorting-algos/shuffle-sort'
 
-export type SortingAlgoRithm = (array: number[]) => Promise<number[]>
+export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<number[]>
 
 // TODO: add more from https://en.wikipedia.org/wiki/Sorting_algorithm
 export enum SortingAlgorithms {

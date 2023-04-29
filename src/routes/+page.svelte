@@ -17,11 +17,13 @@
 		if (currentAlgo) isPlaying = !isPlaying
 		else showError = true
 
-		if(isPlaying && currentAlgo) sortedArray.sort(currentAlgo).then(() => isPlaying = false)
+		if (!isPlaying) {
+			// TODO: stop sorting algo and save state
+		} else if (currentAlgo) sortedArray.sort(currentAlgo, sleep).then(() => (isPlaying = false))
 	}
 
-	let currentSize = 55
-	let deviation = 50 // as a percentage from the mean (50)
+	let currentSize = 105
+	let sleep = 15
 	let currentAlgo: SortingAlgorithms | undefined = undefined
 	let isPlaying = false
 	let showWhenPlaying = false
@@ -29,7 +31,7 @@
 	let movingTimer = 0
 	let showButton = true
 
-	$: sortedArray.reset(currentSize, deviation)
+	$: sortedArray.reset(currentSize)
 	$: if (isPlaying) showWhenPlaying = false
 	$: if (!isPlaying || showWhenPlaying) showButton = true
 	else setTimeout(() => (showButton = false), 300)
@@ -41,9 +43,13 @@
 	<div class="flex flex-col lg:flex-row gap-2">
 		<Slider
 			class="order-2 lg:order-1"
-			on:change={(v) => (currentSize = v.detail)}
+			on:change={(v) => {
+				currentSize = v.detail
+				isPlaying = false
+			}}
 			value={currentSize}
 			min={10}
+			max={200}
 		/>
 		<div class="relative order-1 lg:order-2 max-w-[904px] group">
 			<div
@@ -67,7 +73,15 @@
 			</div>
 			<Canvas array={$sortedArray} />
 		</div>
-		<Slider class="order-3" on:change={(v) => (deviation = v.detail)} value={deviation} />
+		<Slider
+			class="order-3"
+			on:change={(v) => {
+				sleep = v.detail
+				isPlaying = false
+			}}
+			value={sleep}
+			max={50}
+		/>
 	</div>
 
 	<Select
