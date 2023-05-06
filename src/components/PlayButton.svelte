@@ -5,7 +5,7 @@
 	const pathsToCoords = (paths: string[]) =>
 		paths.map((d) =>
 			d
-				.replace(/[LMZ]/g, ',')
+				.replace(/[LCMZ]/g, ',')
 				.split(',')
 				.filter(String)
 				.map((c) => Number(c))
@@ -27,17 +27,28 @@
 		'M246.84631,381.58161L341.39093,434.38173L341.39093,539.98196L246.84631,592.7821Z',
 		'M341.39093,434.38173L435.22131,487.18188L435.22131,487.18188L341.39093,539.98195Z',
 	]
+	// TODO: center in view box
+	const resetPaths = [
+		'M131.993,138.043C141.901,114.921,165.023,98.406,191.447,98.406C224.477,98.406,250.901,122.629,257.407,153.457L278.427,153.457C272.921,110.518,236.588,76.386,191.447,76.386C158.417,76.386,129.791,94.003,115.478,121.527L103.367,109.417L103.367,153.457L147.407,153.457L131.993,138.043Z',
+		'M279.528,175.477L234.386,175.477L250.901,190.891C240.992,214.011,217.871,230.527,190.346,230.527C158.417,230.527,130.892,206.304,125.387,175.477L103.367,175.477C108.872,218.416,146.306,252.547,190.346,252.547C223.376,252.547,252.002,233.83,267.416,207.405L279.528,219.517L279.528,175.477Z',
+	]
 
-	const pauseCoords = pathsToCoords(pausePaths)
-	const playCoords = pathsToCoords(playPaths)
+	const icons = {
+		play: playPaths,
+		pause: pausePaths,
+		reset: resetPaths,
+	}
 
-	const progress = tweened(playCoords, {
+	export let icon: keyof typeof icons = 'play'
+	let hasFinished = true
+
+	const progress = tweened(pathsToCoords(icons[icon]), {
 		duration: 300,
 		easing: cubicInOut,
 	})
 
-	export let isPlaying = false
-	$: isPlaying ? progress.set(pauseCoords) : progress.set(playCoords)
+	$: progress.set(pathsToCoords(icons[icon]))
+	$: icon, (hasFinished = false), setTimeout(() => (hasFinished = true), 300)
 </script>
 
 <div
@@ -45,8 +56,9 @@
 >
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250.51786 279.81226" width="33">
 		<g transform="translate(-212.13203,-347.27573)">
-			<path d={coordsToPath($progress[0])} />
-			<path d={coordsToPath($progress[1])} />
+			{#each [0, 1] as i}
+				<path d={hasFinished ? icons[icon][i] : coordsToPath($progress[i])} />
+			{/each}
 		</g>
 	</svg>
 </div>

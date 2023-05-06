@@ -15,11 +15,18 @@
 	}))
 
 	const handlePlay = () => {
+		if (hasFinished) {
+			hasFinished = false
+			return sortedArray.reset(currentSize)
+		}
 		if (currentAlgo) $isPlaying = !$isPlaying
 		else showError = true
 
 		if ($isPlaying && currentAlgo) {
-			sortedArray.sort(currentAlgo, sleep).then(() => ($isPlaying = false))
+			sortedArray.sort(currentAlgo, sleep).then(() => {
+				if ($isPlaying) hasFinished = true // set only if we returned because we hasFinished sorting and not if we have returned because we stopped
+				$isPlaying = false
+			})
 		}
 	}
 
@@ -30,6 +37,7 @@
 	let showError = false
 	let movingTimer = 0
 	let showButton = true
+	let hasFinished = false
 
 	$: sortedArray.reset(currentSize)
 	$: if ($isPlaying) showWhenPlaying = false
@@ -67,7 +75,7 @@
 			>
 				{#if showButton}
 					<button on:click={handlePlay} class="w-full h-full flex justify-center items-center">
-						<PlayButton isPlaying={$isPlaying} />
+						<PlayButton icon={hasFinished ? 'reset' : $isPlaying ? 'pause' : 'play'} />
 					</button>
 				{/if}
 			</div>
