@@ -6,6 +6,7 @@
 	import PlayButton from '../components/PlayButton.svelte'
 	import classNames from 'classnames'
 	import { sortedArray } from '../stores/sorted-array'
+	import { isPlaying } from '../stores/playing'
 
 	const placeholder = 'Choose an algorithm'
 	const options = Object.values(SortingAlgorithms).map((v) => ({
@@ -14,26 +15,25 @@
 	}))
 
 	const handlePlay = () => {
-		if (currentAlgo) isPlaying = !isPlaying
+		if (currentAlgo) $isPlaying = !$isPlaying
 		else showError = true
 
-		if (!isPlaying) {
-			// TODO: stop sorting algo and save state
-		} else if (currentAlgo) sortedArray.sort(currentAlgo, sleep).then(() => (isPlaying = false))
+		if ($isPlaying && currentAlgo) {
+			sortedArray.sort(currentAlgo, sleep).then(() => ($isPlaying = false))
+		}
 	}
 
 	let currentSize = 105
 	let sleep = 15
 	let currentAlgo: SortingAlgorithms | undefined = undefined
-	let isPlaying = false
 	let showWhenPlaying = false
 	let showError = false
 	let movingTimer = 0
 	let showButton = true
 
 	$: sortedArray.reset(currentSize)
-	$: if (isPlaying) showWhenPlaying = false
-	$: if (!isPlaying || showWhenPlaying) showButton = true
+	$: if ($isPlaying) showWhenPlaying = false
+	$: if (!$isPlaying || showWhenPlaying) showButton = true
 	else setTimeout(() => (showButton = false), 300)
 </script>
 
@@ -45,7 +45,7 @@
 			class="order-2 lg:order-1"
 			on:change={(v) => {
 				currentSize = v.detail
-				isPlaying = false
+				$isPlaying = false
 			}}
 			value={currentSize}
 			min={10}
@@ -54,9 +54,9 @@
 		<div class="relative order-1 lg:order-2 max-w-[904px] group">
 			<div
 				class={classNames('absolute inset-0 bg-txt bg-opacity-30', {
-					'opacity-0 bg-transparent transition duration-300': isPlaying,
+					'opacity-0 bg-transparent transition duration-300': $isPlaying,
 					'group-hover:opacity-100 group-hover:bg-txt group-hover:bg-opacity-30':
-						isPlaying && showWhenPlaying,
+						$isPlaying && showWhenPlaying,
 				})}
 				on:pointerleave={() => (showWhenPlaying = false)}
 				on:pointermove={() => {
@@ -67,7 +67,7 @@
 			>
 				{#if showButton}
 					<button on:click={handlePlay} class="w-full h-full flex justify-center items-center">
-						<PlayButton {isPlaying} />
+						<PlayButton isPlaying={$isPlaying} />
 					</button>
 				{/if}
 			</div>
@@ -77,7 +77,7 @@
 			class="order-3"
 			on:change={(v) => {
 				sleep = v.detail
-				isPlaying = false
+				$isPlaying = false
 			}}
 			value={sleep}
 			max={50}
