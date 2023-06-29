@@ -19,16 +19,23 @@ import { sleep } from '../../utils/sleep'
 
 export const bubbleSort: SortingAlgoRithm = async (initialArray, sleepTime = 0) => {
 	for (let i = 0; i < initialArray.length; i++) {
+		let swapped = false
 		for (let j = 0; j < initialArray.length - 1; j++) {
-			selectedIndex.set(j)
 			const currentArray = get(sortedArray)
 			if (!get(isPlaying)) return currentArray
+
+			selectedIndex.set(j)
+
 			if (currentArray[j] > currentArray[j + 1]) {
 				sortedArray.swapAtIndexes(j, j + 1)
 				selectedIndex.set(j + 1)
+				swapped = true
 			}
+
 			await sleep(sleepTime)
 		}
+
+		if (!swapped) break
 	}
 
 	selectedIndex.set(null)

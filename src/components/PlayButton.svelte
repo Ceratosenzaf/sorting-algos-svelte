@@ -54,10 +54,19 @@
 <div
 	class="w-20 h-20 rounded-full bg-light-gray flex justify-center items-center shadow-lg fill-txt stroke-txt"
 >
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250.51786 279.81226" width="33">
-		<g transform="translate(-212.13203,-347.27573)">
+	<svg
+		class="m-auto"
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 250 250"
+		width="33"
+		style={icon === 'reset' ? 'scale: 1.2' : undefined}
+	>
+		<g
+			transform={icon === 'reset' ? 'translate(-100,-75)' : 'translate(-212.13203,-347.27573)'}
+			style={icon === 'reset' ? 'scale: 1.4' : undefined}
+		>
 			{#each [0, 1] as i}
-				<path d={hasFinished ? icons[icon][i] : coordsToPath($progress[i])} />
+				<path d={hasFinished || icon === 'reset' ? icons[icon][i] : coordsToPath($progress[i])} />
 			{/each}
 		</g>
 	</svg>
