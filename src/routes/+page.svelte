@@ -7,6 +7,7 @@
 	import classNames from 'classnames'
 	import { sortedArray } from '../stores/sorted-array'
 	import { isPlaying } from '../stores/playing'
+	import { selectedIndex } from '../stores/selected-index'
 
 	const placeholder = 'Choose an algorithm'
 	const options = Object.values(SortingAlgorithms).map((v) => ({
@@ -79,16 +80,16 @@
 					</button>
 				{/if}
 			</div>
-			<Canvas array={$sortedArray} />
+			<Canvas array={$sortedArray} selectedIndex={$selectedIndex} />
 		</div>
 		<Slider
 			class="order-3"
 			on:change={(v) => {
-				sleep = v.detail
+				sleep = 100 - v.detail
 				$isPlaying = false
 			}}
-			value={sleep}
-			max={50}
+			value={100 - sleep}
+			max={100}
 		/>
 	</div>
 

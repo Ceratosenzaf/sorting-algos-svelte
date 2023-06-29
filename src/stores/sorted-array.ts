@@ -8,7 +8,8 @@ const createSortedArray = () => {
 
 	const reset = (...v: Parameters<typeof array.reset>) => set(array.reset(...v))
 
-	const sort = async (algo: SortingAlgorithms, sleep: number) => await getSortingAlgo(algo)(get(array), sleep)
+	const sort = async (algo: SortingAlgorithms, sleep: number) =>
+		await getSortingAlgo(algo)(get(array), sleep)
 
 	const setAtIndex = (index: number, value: number) => {
 		update((array) => {
