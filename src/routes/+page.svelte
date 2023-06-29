@@ -74,11 +74,15 @@
 					movingTimer = setTimeout(() => (showWhenPlaying = false), 1000)
 				}}
 			>
-				{#if showButton}
-					<button on:click={handlePlay} class="w-full h-full flex justify-center items-center">
-						<PlayButton icon={hasFinished ? 'reset' : $isPlaying ? 'pause' : 'play'} />
-					</button>
-				{/if}
+				<button
+					on:click={handlePlay}
+					class={classNames(
+						'w-full h-full flex justify-center items-center',
+						showButton ? 'flex' : 'lg:hidden'
+					)}
+				>
+					<PlayButton icon={hasFinished ? 'reset' : $isPlaying ? 'pause' : 'play'} />
+				</button>
 			</div>
 			<Canvas array={$sortedArray} selectedIndex={$selectedIndex} />
 		</div>
