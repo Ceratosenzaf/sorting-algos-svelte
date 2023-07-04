@@ -24,8 +24,13 @@
 		else showError = true
 
 		if ($isPlaying && currentAlgo) {
+			selectedIndex.set(null)
 			sortedArray.sort(currentAlgo, sleep).then(() => {
-				if ($isPlaying) hasFinished = true // set only if we returned because we hasFinished sorting and not if we have returned because we stopped
+				// set only if we returned because we hasFinished sorting and not if we have returned because we stopped
+				if ($isPlaying) {
+					selectedIndex.set(null)
+					hasFinished = true
+				}
 				$isPlaying = false
 			})
 		}

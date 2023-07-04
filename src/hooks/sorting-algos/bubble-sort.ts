@@ -38,6 +38,5 @@ export const bubbleSort: SortingAlgoRithm = async (initialArray, sleepTime = 0) 
 		if (!swapped) break
 	}
 
-	selectedIndex.set(null)
 	return get(sortedArray)
 }

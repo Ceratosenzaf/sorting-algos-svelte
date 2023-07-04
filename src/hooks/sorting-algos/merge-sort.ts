@@ -92,6 +92,7 @@ export const mergeSort: SortingAlgoRithm = async (array, sleepTime = 0) => {
 		}
 
 		for (let k = l; k <= r; k++) {
+			if (!get(isPlaying)) return
 			sortedArray.setAtIndex(k, b[k - l])
 			selectedIndex.set(k)
 			await sleep(sleepTime)
@@ -100,6 +101,5 @@ export const mergeSort: SortingAlgoRithm = async (array, sleepTime = 0) => {
 
 	await mergeSortAlgo(0, array.length - 1)
 
-	selectedIndex.set(null)
 	return get(sortedArray)
 }
