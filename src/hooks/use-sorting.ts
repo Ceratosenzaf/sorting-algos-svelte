@@ -3,6 +3,7 @@ import { mergeSort } from './sorting-algos/merge-sort'
 import { bubbleSort } from './sorting-algos/bubble-sort'
 import { shuffleSort } from './sorting-algos/shuffle-sort'
 import { selectionSort } from './sorting-algos/selection-sort'
+import { insertionSort } from './sorting-algos/insertion-sort'
 
 export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<number[]>
 
@@ -13,6 +14,7 @@ export enum SortingAlgorithms {
 	Bubble = 'Bubble Sort',
 	Shuffle = 'Shuffle Sort',
 	Selection = 'Selection Sort',
+	Insertion = 'Insertion Sort',
 }
 
 const sortingAlgos = {
@@ -21,6 +23,7 @@ const sortingAlgos = {
 	[SortingAlgorithms.Quick]: quickSort,
 	[SortingAlgorithms.Shuffle]: shuffleSort,
 	[SortingAlgorithms.Selection]: selectionSort,
+	[SortingAlgorithms.Insertion]: insertionSort,
 }
 
 export const getSortingAlgo = (algo: SortingAlgorithms) => sortingAlgos[algo]
