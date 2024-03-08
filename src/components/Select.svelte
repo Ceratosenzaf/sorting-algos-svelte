@@ -5,6 +5,7 @@
 	interface Option {
 		value: any
 		label: string
+		disabled?: boolean
 	}
 
 	export let options: Option[] = []
@@ -27,6 +28,6 @@
 		<option class="text-txt" value="" disabled selected>{placeholder}</option>
 	{/if}
 	{#each options as option}
-		<option class="text-txt" value={option.value}>{option.label}</option>
+		<option class="text-txt" value={option.value} disabled={option.disabled}>{option.label}</option>
 	{/each}
 </select>

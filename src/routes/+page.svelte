@@ -1,6 +1,10 @@
 <script lang="ts">
 	import Canvas from '../components/Canvas.svelte'
-	import { SortingAlgorithms } from '../hooks/use-sorting'
+	import {
+		SortingAlgorithms,
+		isSortingAlgoImplemented,
+		type ImplementedSortingAlgo,
+	} from '../hooks/use-sorting'
 	import Slider from '../components/Slider.svelte'
 	import Select from '../components/Select.svelte'
 	import PlayButton from '../components/PlayButton.svelte'
@@ -13,6 +17,7 @@
 	const options = Object.values(SortingAlgorithms).map((v) => ({
 		value: v,
 		label: v,
+		disabled: !isSortingAlgoImplemented(v),
 	}))
 
 	const handlePlay = () => {
@@ -40,7 +45,7 @@
 
 	let currentSize = 105
 	let sleep = 15
-	let currentAlgo: SortingAlgorithms | undefined = undefined
+	let currentAlgo: ImplementedSortingAlgo | undefined = undefined
 	let showWhenPlaying = false
 	let showError = false
 	let movingTimer = 0

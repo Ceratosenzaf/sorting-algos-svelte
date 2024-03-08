@@ -1,5 +1,5 @@
 import { writable, get } from 'svelte/store'
-import type { SortingAlgorithms } from '../hooks/use-sorting'
+import type { ImplementedSortingAlgo } from '../hooks/use-sorting'
 import { getSortingAlgo } from '../hooks/use-sorting'
 import { array } from './array'
 
@@ -8,7 +8,7 @@ const createSortedArray = () => {
 
 	const reset = (...v: Parameters<typeof array.reset>) => set(array.reset(...v))
 
-	const sort = async (algo: SortingAlgorithms, sleep: number) =>
+	const sort = async (algo: ImplementedSortingAlgo, sleep: number) =>
 		await getSortingAlgo(algo)(get(array), sleep)
 
 	const setAtIndex = (index: number, value: number) => {
