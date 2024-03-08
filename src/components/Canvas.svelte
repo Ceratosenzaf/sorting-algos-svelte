@@ -3,6 +3,7 @@
 
 	export let array: number[] = []
 	export let selectedIndex: number | null = null
+	export let otherIndexes: number[]
 	export let aspectRatio = 2
 
 	let canvas: HTMLCanvasElement | null = null
@@ -19,10 +20,11 @@
 		drawAllRect(array)
 	})
 
-	$: selectedIndex, drawAllRect(array)
+	$: selectedIndex, otherIndexes, drawAllRect(array)
 
 	const getFill = (i: number) => {
 		if (i === selectedIndex) return 'green'
+		if (otherIndexes.includes(i)) return 'blue'
 		return 'red'
 	}
 

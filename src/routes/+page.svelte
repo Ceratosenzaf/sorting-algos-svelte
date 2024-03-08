@@ -7,7 +7,7 @@
 	import classNames from 'classnames'
 	import { sortedArray } from '../stores/sorted-array'
 	import { isPlaying } from '../stores/playing'
-	import { selectedIndex } from '../stores/selected-index'
+	import { selectedIndex, otherIndexes } from '../stores/selected-index'
 
 	const placeholder = 'Choose an algorithm'
 	const options = Object.values(SortingAlgorithms).map((v) => ({
@@ -25,10 +25,12 @@
 
 		if ($isPlaying && currentAlgo) {
 			selectedIndex.set(null)
+			otherIndexes.set([])
 			sortedArray.sort(currentAlgo, sleep).then(() => {
 				// set only if we returned because we hasFinished sorting and not if we have returned because we stopped
 				if ($isPlaying) {
 					selectedIndex.set(null)
+					otherIndexes.set([])
 					hasFinished = true
 				}
 				$isPlaying = false
@@ -89,7 +91,7 @@
 					<PlayButton icon={hasFinished ? 'reset' : $isPlaying ? 'pause' : 'play'} />
 				</button>
 			</div>
-			<Canvas array={$sortedArray} selectedIndex={$selectedIndex} />
+			<Canvas array={$sortedArray} selectedIndex={$selectedIndex} otherIndexes={$otherIndexes} />
 		</div>
 		<Slider
 			class="order-3"
