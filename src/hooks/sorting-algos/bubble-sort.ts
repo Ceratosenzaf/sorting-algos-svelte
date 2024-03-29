@@ -4,9 +4,9 @@
 	Space complexity: O(1)
 	
 	for i in [0, n-2]:
-		for j in [i, n-1]:
-			if array[i] > array[j]:
-				swap(array[i], array[j])
+		for j in [0, n-i-2]:
+			if array[j] > array[j+1]:
+				swap(array[j], array[j+1])
 	return array
 */
 
@@ -20,16 +20,16 @@ import { sleep } from '../../utils/sleep'
 export const bubbleSort: SortingAlgoRithm = async (initialArray, sleepTime = 0) => {
 	for (let i = 0; i < initialArray.length - 1; i++) {
 		let swapped = false
-		selectedIndex.set(i)
 
-		for (let j = i + 1; j < initialArray.length; j++) {
+		for (let j = 0; j < initialArray.length - i - 1; j++) {
 			const currentArray = get(sortedArray)
 			if (!get(isPlaying)) return currentArray
 
-			otherIndexes.set([j])
+			selectedIndex.set(j)
+			otherIndexes.set([j + 1])
 
-			if (currentArray[i] > currentArray[j]) {
-				sortedArray.swapAtIndexes(i, j)
+			if (currentArray[j] > currentArray[j + 1]) {
+				sortedArray.swapAtIndexes(j, j + 1)
 				swapped = true
 			}
 

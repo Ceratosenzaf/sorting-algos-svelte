@@ -5,6 +5,7 @@
 	export let min = 0
 	export let max = 100
 	export let value = 50
+	export let title: string
 
 	const dispatch = createEventDispatcher<{ change: number }>()
 	const onChange = (e: RangeSlider.RangeSliderEvents['change']) => {
@@ -13,10 +14,10 @@
 </script>
 
 <div class={$$props.class}>
-	<div class="hidden lg:block h-full">
+	<div class="hidden lg:block h-full" {title}>
 		<RangeSlider vertical {min} {max} values={[value]} on:change={onChange} />
 	</div>
-	<div class="lg:hidden h-full">
+	<div class="lg:hidden h-full" {title}>
 		<RangeSlider {min} {max} values={[value]} on:change={onChange} />
 	</div>
 </div>

@@ -71,6 +71,7 @@
 			value={currentSize}
 			min={10}
 			max={200}
+			title="size"
 		/>
 		<div class="relative order-1 lg:order-2 max-w-[904px] group">
 			<div
@@ -106,6 +107,7 @@
 			}}
 			value={100 - sleep}
 			max={100}
+			title="speed"
 		/>
 	</div>
 
