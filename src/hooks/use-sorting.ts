@@ -3,6 +3,7 @@ import { bubbleSort } from './sorting-algos/bubble-sort'
 import { shuffleSort } from './sorting-algos/shuffle-sort'
 import { selectionSort } from './sorting-algos/selection-sort'
 import { insertionSort } from './sorting-algos/insertion-sort'
+import { quickSort } from './sorting-algos/quick-sort'
 
 export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<number[]>
 
@@ -22,6 +23,7 @@ const sortingAlgos = {
 	[SortingAlgorithms.Shuffle]: shuffleSort,
 	[SortingAlgorithms.Selection]: selectionSort,
 	[SortingAlgorithms.Insertion]: insertionSort,
+	[SortingAlgorithms.Quick]: quickSort,
 }
 
 export type ImplementedSortingAlgo = keyof typeof sortingAlgos

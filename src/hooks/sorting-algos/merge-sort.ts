@@ -8,7 +8,7 @@
 			m = (l + r) / 2
 			mergeSort(array, l, m)
 			mergeSort(array, m + 1, r)
-			return merge(a, l, m, r)
+			return merge(array, l, m, r)
 		return array
 
 	func merge(a, l, m, r):
