@@ -25,18 +25,17 @@ export const selectionSort: SortingAlgoRithm = async (initialArray, sleepTime = 
 		if (!get(isPlaying)) return currentArray
 
 		let min = i
-		selectedIndex.set(min)
 		for (let j = i + 1; j < initialArray.length; j++) {
 			if (currentArray[j] < currentArray[min]) {
 				min = j
 			}
+			otherIndexes.set([j])
+			await sleep(sleepTime)
 		}
-
-		otherIndexes.set([min])
-		await sleep(sleepTime)
 
 		sortedArray.swapAtIndexes(i, min)
 		selectedIndex.set(i)
+		otherIndexes.set([min])
 		await sleep(sleepTime)
 	}
 
