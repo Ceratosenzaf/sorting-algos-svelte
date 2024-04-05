@@ -4,6 +4,7 @@ import { shuffleSort } from './sorting-algos/shuffle-sort'
 import { selectionSort } from './sorting-algos/selection-sort'
 import { insertionSort } from './sorting-algos/insertion-sort'
 import { quickSort } from './sorting-algos/quick-sort'
+import { heapSort } from './sorting-algos/heap-sort'
 
 export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<number[]>
 
@@ -15,6 +16,7 @@ export enum SortingAlgorithms {
 	Merge = 'Merge Sort',
 	Shuffle = 'Shuffle Sort',
 	Quick = 'Quick Sort',
+	Heap = 'Heap Sort',
 }
 
 const sortingAlgos = {
@@ -24,6 +26,7 @@ const sortingAlgos = {
 	[SortingAlgorithms.Selection]: selectionSort,
 	[SortingAlgorithms.Insertion]: insertionSort,
 	[SortingAlgorithms.Quick]: quickSort,
+	[SortingAlgorithms.Heap]: heapSort,
 }
 
 export type ImplementedSortingAlgo = keyof typeof sortingAlgos

@@ -4,7 +4,7 @@
   Max time complexity: O(n^2)
 	Space complexity: O(1)
 	
-	func quickSort(array, l, r):
+	func quickSort(array, l=0, r=len(array)-1):
     if l < r:
       p = partition(array, l, r)
       quickSort(array, l, p-1)

@@ -3,7 +3,7 @@
 	Time complexity: O(nlogn)
 	Space complexity: O(1)
 	
-	func mergeSort(array, l, r):
+	func mergeSort(array, l=0, r=len(array)-1):
 		if l < r:
 			m = (l + r) / 2
 			mergeSort(array, l, m)
