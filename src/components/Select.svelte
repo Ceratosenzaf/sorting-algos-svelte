@@ -28,6 +28,11 @@
 		<option class="text-txt" value="" disabled selected>{placeholder}</option>
 	{/if}
 	{#each options as option}
-		<option class="text-txt" value={option.value} disabled={option.disabled}>{option.label}</option>
+		<option
+			class="text-txt"
+			value={option.value}
+			disabled={option.disabled}
+			title={option.disabled ? 'not implemented yet' : undefined}>{option.label}</option
+		>
 	{/each}
 </select>

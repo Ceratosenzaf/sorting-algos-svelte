@@ -12,8 +12,8 @@
     return array
 
 	func partition(array, l, r):
-    p = random(l, r)
-    i = l-1
+    p = random(l, r) | l | r | midpoint(l, r)
+    i = l-1 
 
     for j in [l, r]:
       if array[j] > array[p]:
