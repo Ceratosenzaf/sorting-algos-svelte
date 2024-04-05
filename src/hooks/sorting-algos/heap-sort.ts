@@ -4,7 +4,23 @@
 	Space complexity: O(1)
 	
 	func heapSort(array):
-    ...
+    start = parent(n)
+    end = n
+    while end > 1:
+      if start > 0:
+        start--
+      else:
+        end--
+        swap(array[end], array[0])
+      root = start
+      while hasChildren(root):
+        child = maxChild(root)
+        if array[root] < array[child]:
+          swap(array[root], array[child])
+          root = child
+        else:
+          break
+    return array
 */
 
 import { get } from 'svelte/store'
@@ -54,7 +70,6 @@ export const heapSort: SortingAlgoRithm = async (array, sleepTime = 0) => {
 	const rightChild = (i: number) => i * 2 + 2
 
 	await heapSortAlgo()
-	console.log(get(sortedArray))
 
 	return get(sortedArray)
 }
