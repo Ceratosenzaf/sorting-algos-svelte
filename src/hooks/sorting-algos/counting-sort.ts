@@ -1,13 +1,13 @@
 /*
 	Counting sort algorithm.
 	Time complexity: O(n+k)
-	Space complexity: O(n+k)
+	Space complexity: O(k)
 	
   M = max(array)
   m = min(array)
   k = M - m
 
-  count = makeArray(k+1)
+  count = new array(k+1)
   for i in [0, n-1]:
     j = array[i] - m
     count[j]++

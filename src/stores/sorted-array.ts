@@ -9,7 +9,8 @@ const createSortedArray = () => {
 	const reset = (...v: Parameters<typeof array.reset>) => set(array.reset(...v))
 
 	const sort = async (algo: ImplementedSortingAlgo, sleep: number) => {
-		const arr = isSortingAlgoIntOnly(algo) ? get(array) : get(array).map(Math.round)
+		const arr = isSortingAlgoIntOnly(algo) ? get(array).map(Math.round) : get(array)
+		set(arr)
 		await getSortingAlgo(algo)(arr, sleep)
 	}
 

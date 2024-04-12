@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
+	import { MAX_ARRAY_VALUE } from '../hooks/use-sorting'
 
 	export let array: number[] = []
 	export let selectedIndex: number | null = null
@@ -35,7 +36,7 @@
 		const w = canvas.width / array.length
 		arr.forEach((n, i) => {
 			ctx!.fillStyle = getFill(i)
-			const h = (canvas!.height / 100) * n
+			const h = (canvas!.height / MAX_ARRAY_VALUE) * n
 			ctx?.fillRect(i * w + 0.5, canvas!.height, w - 1, -h)
 		})
 	}

@@ -6,6 +6,7 @@ import { insertionSort } from './sorting-algos/insertion-sort'
 import { quickSort } from './sorting-algos/quick-sort'
 import { heapSort } from './sorting-algos/heap-sort'
 import { countingSort } from './sorting-algos/counting-sort'
+import { radixSort } from './sorting-algos/radix-sort'
 
 export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<number[]>
 
@@ -19,9 +20,13 @@ export enum SortingAlgorithms {
 	Quick = 'Quick Sort',
 	Heap = 'Heap Sort',
 	Counting = 'Counting Sort',
+	Radix = 'Radix Sort',
 }
 
-const IntOnlySortingAlgos = new Set(SortingAlgorithms.Counting)
+const IntOnlySortingAlgos: SortingAlgorithms[] = [
+	SortingAlgorithms.Counting,
+	SortingAlgorithms.Radix,
+]
 
 const sortingAlgos = {
 	[SortingAlgorithms.Bubble]: bubbleSort,
@@ -32,6 +37,7 @@ const sortingAlgos = {
 	[SortingAlgorithms.Quick]: quickSort,
 	[SortingAlgorithms.Heap]: heapSort,
 	[SortingAlgorithms.Counting]: countingSort,
+	[SortingAlgorithms.Radix]: radixSort,
 }
 
 export type ImplementedSortingAlgo = keyof typeof sortingAlgos
@@ -39,6 +45,8 @@ export type ImplementedSortingAlgo = keyof typeof sortingAlgos
 export const isSortingAlgoImplemented = (algo: SortingAlgorithms) =>
 	Object.keys(sortingAlgos).includes(algo)
 
-export const isSortingAlgoIntOnly = (algo: SortingAlgorithms) => IntOnlySortingAlgos.has(algo)
+export const isSortingAlgoIntOnly = (algo: SortingAlgorithms) => IntOnlySortingAlgos.includes(algo)
 
 export const getSortingAlgo = (algo: ImplementedSortingAlgo) => sortingAlgos[algo]
+
+export const MAX_ARRAY_VALUE = 1000000
