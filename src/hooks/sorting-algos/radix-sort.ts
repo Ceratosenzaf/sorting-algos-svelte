@@ -1,10 +1,10 @@
 /*
 	Radix sort algorithm.
-	Time complexity: O(n+k)
-	Space complexity: O(k)
+	Time complexity: O(n(d+b))
+	Space complexity: O(n(d+b))
 	
   k = max(array)
-  d = log_k(radix)+1
+  d = floor(log_base(k))+1
 
   for i in [0, d-1]:
     array = countingSort(array, base, i)
