@@ -1,6 +1,6 @@
 import { writable, get } from 'svelte/store'
 import type { ImplementedSortingAlgo } from '../hooks/use-sorting'
-import { getSortingAlgo } from '../hooks/use-sorting'
+import { getSortingAlgo, isSortingAlgoIntOnly } from '../hooks/use-sorting'
 import { array } from './array'
 
 const createSortedArray = () => {
@@ -8,8 +8,10 @@ const createSortedArray = () => {
 
 	const reset = (...v: Parameters<typeof array.reset>) => set(array.reset(...v))
 
-	const sort = async (algo: ImplementedSortingAlgo, sleep: number) =>
-		await getSortingAlgo(algo)(get(array), sleep)
+	const sort = async (algo: ImplementedSortingAlgo, sleep: number) => {
+		const arr = isSortingAlgoIntOnly(algo) ? get(array) : get(array).map(Math.round)
+		await getSortingAlgo(algo)(arr, sleep)
+	}
 
 	const setAtIndex = (index: number, value: number) => {
 		update((array) => {
