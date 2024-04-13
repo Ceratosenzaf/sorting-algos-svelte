@@ -17,7 +17,7 @@
     while count[i] > 0:
       array[j] = i + m
       count[i]--
-      k++
+      j++
 
 	return array
 */

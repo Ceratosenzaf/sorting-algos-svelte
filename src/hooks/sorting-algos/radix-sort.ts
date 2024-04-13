@@ -4,7 +4,7 @@
 	Space complexity: O(n(d+b))
 	
   k = max(array)
-  d = floor(log_base(k))+1
+  d = roundUp(log_base(k))
 
   for i in [0, d-1]:
     array = countingSort(array, base, i)
@@ -51,7 +51,7 @@ export const radixSort: SortingAlgoRithm = async (initialArray, sleepTime = 0) =
 		max = Math.max(max, initialArray[i])
 	}
 
-	const maxDigits = Math.floor(Math.log(max) / Math.log(BASE)) + 1
+	const maxDigits = Math.ceil(Math.log(max) / Math.log(BASE))
 	for (let i = 0; i < maxDigits; i++) {
 		if (!get(isPlaying)) return get(sortedArray)
 

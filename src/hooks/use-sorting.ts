@@ -12,11 +12,11 @@ export type SortingAlgoRithm = (array: number[], sleep: number) => Promise<numbe
 
 // TODO: add more from https://en.wikipedia.org/wiki/Sorting_algorithm
 export enum SortingAlgorithms {
+	Shuffle = 'Shuffle Sort',
 	Selection = 'Selection Sort',
 	Insertion = 'Insertion Sort',
 	Bubble = 'Bubble Sort',
 	Merge = 'Merge Sort',
-	Shuffle = 'Shuffle Sort',
 	Quick = 'Quick Sort',
 	Heap = 'Heap Sort',
 	Counting = 'Counting Sort',
